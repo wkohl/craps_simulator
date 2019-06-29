@@ -5,22 +5,52 @@
 
 // enumeration constants represent game status
 enum Status { CONTINUE, WON, LOST };
+struct variables_ {
+	int simulations;
+	float win;
+	float loss;
+	float house;
+};
 
-int rollDice(void); // function prototype
+int rollDice(void);									// function prototype
+struct variables_ return_variables(int sim_num);	// function prototype
 
 int main(void) {
-	float win = 0;
-	float loss = 0;
+	// Variables
 	unsigned int simulations;
-	float house;
 
-	// randomize random number generator using current time
-	srand(time(NULL));
+	struct variables_ c1;
 
+	// Prompt
 	printf("Simulation Number: ");
-	scanf_s("%i", &simulations);
+	c1 = return_variables(scanf_s("%i", &simulations));
 
-	for (int i = 0; i < simulations; i++) {
+	//// Set Seed
+	//srand(time(NULL));
+
+	//// Print Results
+	//printf("Player: %1.0f\nHouse: %1.0f\nHouse Win Percentage: %1.2f%%\n\n", c1.win, c1.loss, c1.house);
+
+	//// Pause Exit
+	//system("pause");
+}
+
+int rollDice(void)
+{
+	int die1 = 1 + (rand() % 6); // pick random die1 value
+	int die2 = 1 + (rand() % 6); // pick random die2 value
+
+	// display results of this roll
+	// printf("Player rolled %d + %d = %d\n", die1, die2, die1 + die2);
+	return die1 + die2; // return sum of dice
+}
+
+struct variables_ return_variables(int sim_num) {
+
+	struct variables_ score;
+	score.simulations = sim_num;
+
+	for (int i = 0; i < score.simulations; i++) {
 		int myPoint; // player must make this point to win
 		enum Status gameStatus; // can contain CONTINUE, WON, or LOST
 		int sum = rollDice(); // first roll of the dice
@@ -48,6 +78,7 @@ int main(void) {
 			// printf("Point is %d\n", myPoint);
 			break; // optional
 		}
+
 		// while game not complete
 		while (CONTINUE == gameStatus) { // player should keep rolling
 			sum = rollDice(); // roll dice again
@@ -66,30 +97,13 @@ int main(void) {
 		// display won or lost message
 		if (WON == gameStatus) { // did player win?
 			// puts("Player wins");
-			win++;
+			score.win++;
 		}
 		else { // player lost
 			// puts("Player loses");
-			loss++;
+			score.loss++;
 		}
-
-		house = (1 - (win / loss)) * 100;
-		printf("Run: %i, House Win Percentage: % 1.2f%%\n", i, house);
 	}
-	house = (1 - (win / loss)) * 100;
-	printf("Player: %1.0f\nHouse: %1.0f\nHouse Win Percentage: %1.2f%%\n\n", win, loss, house);
 
-	system("pause");
-}
-
-// roll dice, calculate sum and display results
-
-int rollDice(void)
-{
-	int die1 = 1 + (rand() % 6); // pick random die1 value
-	int die2 = 1 + (rand() % 6); // pick random die2 value
-
-	// display results of this roll
-	// printf("Player rolled %d + %d = %d\n", die1, die2, die1 + die2);
-	return die1 + die2; // return sum of dice
+	return score;
 }
