@@ -75,7 +75,7 @@ int main(void) {
 		}
 
 		house = (1 - (win / loss)) * 100;
-		printf("Run: %i, House Win Percentage: % 1.2f %%\n", i, house);
+		printf("Run: %i, House Win Percentage: % 1.2f%%\n", i, house);
 	}
 	house = (1 - (win / loss)) * 100;
 	printf("Player: %1.0f\nHouse: %1.0f\nHouse Win Percentage: %1.2f%%\n\n", win, loss, house);
