@@ -1,5 +1,4 @@
-// Fig. 5.14: fig05_14.c
- // Simulating the game of craps.
+// Simulating the game of craps.
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h> // contains prototype for function time
@@ -79,8 +78,6 @@ int main(void) {
 	}
 	house = (1 - (win / loss)) * 100;
 	printf("Player: %1.0f\nHouse: %1.0f\nHouse Win Percentage: %1.2f%%\n\n", win, loss, house);
-
-	main();
 }
 
 // roll dice, calculate sum and display results
