@@ -78,6 +78,8 @@ int main(void) {
 	}
 	house = (1 - (win / loss)) * 100;
 	printf("Player: %1.0f\nHouse: %1.0f\nHouse Win Percentage: %1.2f%%\n\n", win, loss, house);
+
+	system("pause");
 }
 
 // roll dice, calculate sum and display results
